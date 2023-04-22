@@ -1,0 +1,132 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+
+
+<div class="content-wrapper" *ngIf="spinerLoading==true">
+    <div class="content-header">
+        <div class="d-flex justify-content-center">
+            <div class="spinner-border" role="status">
+                <span class="visually-hidden"></span>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="content-wrapper" style="min-height: auto " *ngIf="spinerLoading==false">
+    <div class="content-header">
+        <div id="data"></div>
+        <br />
+        <a><button type="submit" class="btn btn-warning text-white" (click)="isGetByApproveStatus(false)">
+                All pending
+            </button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+        <a><button type="submit" class="btn btn-success" (click)="isGetByApproveStatus(true)">
+                All completed
+            </button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+    </div>
+    <div class="table-responsive" *ngIf="showEmtyPage==true">
+        <h2>User of List Deposits</h2>
+        <table class="table">
+            <thead class="table-dark">
+                <tr>
+                    <th>Id</th>
+                    <th>Username</th>
+                    <th>Amount</th>
+                    <th>createdAt</th>
+                    <th>Status</th>
+                    <th>Approve By</th>
+                    <th>Check</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of walletdata">
+                    <th scope="row">{{item._id}}</th>
+                    <th >{{item.owner.fullname}}</th>
+                    <td> <strong class="text-success"> {{item.amount}} $</strong></td>
+                    <td>{{item.createdAt.split(':')[0]}}</td>
+                    <td *ngIf="item.isSuccess==true">
+                        <span class="badge badge-success text-white p-3">Success</span>
+                    </td>
+                    <td *ngIf="item.isSuccess==false">
+                        <span class="badge badge-warning text-white p2"> pending</span>
+                    </td>
+                    <td>
+                        <span class="info-box-text text-success p-2 font-weight-bold"
+                            *ngIf="item.isSuccess==true">completed</span>
+
+                        <button class="btn btn-warning btn-sm  text-white" (click)="confrimAlert(item._id)"
+                            *ngIf="item.isSuccess==false">Except</button>
+
+                    </td>
+
+               
+                    <td>
+                        <button class="btn btn-primary btn-sm" data-toggle="modal"
+                            data-target="#exampleModal">imgage</button>
+
+                    </td>
+                    <!-- Modal -->
+                    <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                        aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="exampleModalLabel">Photo Detail</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="product-img ">
+                                        {{loadImage(item.transferSlip)}}
+                                        <img crossorigin="anonymous" [src]="imageSource">
+                                    </div>
+                                </div>
+                                <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Save changes</button>
+        </div> -->
+                            </div>
+                        </div>
+                    </div>
+                    <!-- modal -->
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="tab-content" *ngIf="showEmtyPage==false">
+        <div class="tab-empty" style="height: 598.8px;">
+            <h2 class="display-4">No have data!</h2>
+        </div>
+    </div>
+
+    <!-- modal -->
+
+
+    <!-- <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item"><a class="page-link" href="#">Next</a></li>
+        </ul>
+      </nav> -->
+
+
+    <!-- paging -->
+    <nav>
+        <ul class="pagination">
+            <li class="page-item button" *ngFor="let buttons of pageingtation.pageingtations(pageTotal,pageTotal)"
+                [ngClass]="{'button-them': buttons?.active === 1}">
+                <a class="page-link myclass" [ngClass]="{'myclass':buttons?.active === 1}"
+                    (click)="click_pagemodalTo(buttons?.page)">{{buttons?.name}}</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- paging -->
+</div>
+
+<div id="sidebar-overlay"></div>
+
+<!-- <app-footer></app-footer> -->

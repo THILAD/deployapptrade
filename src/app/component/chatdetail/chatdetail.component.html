@@ -1,0 +1,140 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+<div class="content-wrapper">
+  <section style="background-color: #eee">
+
+    <div class="container">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card" id="chat2">
+            <div class="card-header d-flex justify-content-between align-items-center p-3">
+              <h5 class="mb-0"></h5>
+              <button type="button" class="btn btn-primary btn-sm" data-mdb-ripple-color="dark">
+                Let's Chat App
+              </button>
+            </div>
+            <div class="card-body scroll" id="chatscroll" data-mdb-perfect-scrollbar="true" style="position: relative" >
+              <!-- end -->
+              <div *ngFor="let item of chatlistChat" class="d-flex flex-row justify-content-start "[ngClass]="{}"   >
+                <div>
+                  <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                    {{item.text}}
+                  </p>
+                  <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
+                    00:15
+                  </p>
+                </div>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="avatar 1"
+                  style="width: 45px; height: 100%" />
+              </div>
+              <!-- end -->
+
+              <!-- start *ngIf="item._id==user_id" -->
+
+ <!-- message from admin -->
+ <div *ngFor="let item of chatlistChat">
+  <div   class="d-flex flex-row justify-content-end"  >
+    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 1"
+      style="width: 45px; height: 100%" />
+    <!-- <div *ngIf="user_id===item?._id" >  -->
+    <div *ngIf="user_id==='640c03de9acccc66b6d557fc'" > 
+
+      <!-- 640c03de9acccc66b6d557fc -->
+      <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7" *ngIf="item.user===user_id">
+        {{item.text}}
+      </p>
+      <p class="small ms-3 mb-3 rounded-3 text-muted">23:58</p>
+    </div>
+  </div>
+</div>
+
+              <!-- start *ngIf="item._id==user_id" -->
+
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 3"
+                style="width: 40px; height: 100%" />
+              <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1" (keyup)="getMessaged($event)" (keyup.enter)="isSendMessaged()"
+                placeholder="Type message" />
+              <a class="ms-3 pt-3 "><i class="fas fa-paperclip" ></i></a>&nbsp;&nbsp;
+              <a class="ms-3 pt-3"><i class="fas fa-paper-plane" (click)="isSendMessaged()"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- test chat -->
+
+    <div class="container" style="display: none;">
+      <div class="row d-flex justify-content-center">
+        <div class="col-md-12 col-lg-12">
+          <div class="card" id="chat2">
+            <div class="card-header d-flex justify-content-between align-items-center p-3">
+              <h5 class="mb-0">Chat</h5>
+              <button type="button" class="btn btn-primary btn-sm" data-mdb-ripple-color="dark">
+                Let's Chat App
+              </button>
+            </div>
+            <div class="card-body" id="chatscroll" data-mdb-perfect-scrollbar="true" style="position: relative"
+              *ngFor="let item of chatlistChat">
+
+              <!-- end -->
+              <div class="d-flex flex-row justify-content-end">
+                <div>
+                  <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                    admintrb der
+                  </p>
+                  <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
+                    00:15
+                  </p>
+                </div>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="avatar 1"
+                  style="width: 45px; height: 100%" />
+              </div>
+              <!-- end -->
+              <!-- end -->
+              <div class="d-flex flex-row justify-content-end">
+                <div>
+                  <p class="small p-2 me-3 mb-1 text-white rounded-3 bg-primary">
+                    admintrb der
+                  </p>
+                  <p class="small me-3 mb-3 rounded-3 text-muted d-flex justify-content-end">
+                    00:15
+                  </p>
+                </div>
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava4-bg.webp" alt="avatar 1"
+                  style="width: 45px; height: 100%" />
+              </div>
+              <!-- end -->
+              <!-- start *ngIf="item._id==user_id" -->
+              <div class="d-flex flex-row justify-content-start">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 1"
+                  style="width: 45px; height: 100%" />
+                <div>
+                  <p class="small p-2 ms-3 mb-1 rounded-3" style="background-color: #f5f6f7">
+                    {{item.text}}
+                  </p>
+                  <p class="small ms-3 mb-3 rounded-3 text-muted">23:58</p>
+                </div>
+              </div>
+            </div>
+            <div class="card-footer text-muted d-flex justify-content-start align-items-center p-3">
+              <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3-bg.webp" alt="avatar 3"
+                style="width: 40px; height: 100%" />
+              <input type="text" class="form-control form-control-lg" id="exampleFormControlInput1"
+                (keyup)="getMessaged($event)" (keyup.enter)="isSendMessaged()" placeholder="Type message" />
+              <a class="ms-3 pt-3 "><i class="fas fa-paperclip"></i></a>&nbsp;&nbsp;
+              <a class="ms-3 pt-3"><i class="fas fa-paper-plane" (click)="isSendMessaged()"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div id="sidebar-overlay"></div>

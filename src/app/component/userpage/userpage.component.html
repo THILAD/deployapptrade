@@ -1,0 +1,131 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+<div class="content-wrapper" style="min-height: auto">
+  <div class="content-header">
+    <section id="container" class="sidebar-close">
+      <section id="main-content">
+        <section class="wrapper">
+          <div class="row state-overview">
+            <div class="container">
+              <!-- tttt -->
+              <div class="container-fluid">
+                <div class="row">
+                  <div class="col-md-8 offset-md-2">
+                    <form action="simple-results.html">
+                      <div class="input-group input-group-lg">
+                        <input (keyup)="keyupGetvalueSeach($event)" type="search" class="form-control form-control-lg"
+                          (keyup.enter)="isSeachCustomer()" placeholder="Type your user name!" value="" />
+                        <div class="input-group-append">
+                          <button type="submit" class="btn btn-lg btn-default">
+                            <i class="fa fa-search" (click)="isSeachCustomer()"></i>
+                          </button>
+                        </div>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+              <!-- tttt -->
+            </div>
+          </div>
+
+          <br />
+
+          <!-- <a
+            ><button (click)="getlistCustomer()" type="submit" class="btn btn-success">
+              All Customer
+            </button></a
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+          <a 
+            ><button (click)="getlistSuperAdmin()" type="submit" class="btn btn-danger">All Admin</button></a
+          >&nbsp;&nbsp;&nbsp;&nbsp;
+
+          <a 
+            ><button type="submit" class="btn btn-primary">Add User+</button></a
+          >&nbsp;&nbsp;&nbsp;&nbsp; -->
+        </section>
+      </section>
+    </section>
+  </div>
+
+  <div class="content">
+    <h3>
+      List of Users
+      <!-- <small class="text-muted">With faded secondary text</small> -->
+    </h3>
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">userId</th>
+            <th scope="col">usernaem</th>
+            <th scope="col">createAt</th>
+            <!-- <th scope="col">updateAt</th> -->
+            <th scope="col">permistion</th>
+
+            <!-- <th scope="col">Amount Balance</th> -->
+            <th scope="col">Verified</th>
+            <th scope="col">Banned Status</th>
+
+            <th scope="col">action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of dataList">
+            <th scope="row">{{ item._id }}</th>
+            <td>{{ item.username }}</td>
+            <td>{{ item.createdAt.split(":")[0] }}</td>
+            <!-- <td>{{ item.updatedAt.split(':')[0] }}</td>  -->
+            <td>{{ item.role }}</td>
+            <!-- <td>{{ item.isVerified.status }}</td> -->
+            <td>
+              <span *ngIf="item.isVerified.status === 'approved'" class="badge badge-success p-2">Approved</span>
+              <span class="badge badge-warning p-2" *ngIf="item.isVerified.status === 'pending'">Pending</span>
+              <span class="badge badge-danger p-2" *ngIf="item.isVerified.status === 'rejected'">Rejected</span>
+            </td>
+            <td>
+              <span class="badge text-muted  p-2" *ngIf="item.isBanned === false">none</span>
+              <span class="badge badge-danger p-2" *ngIf="item.isBanned === true">Banned</span>
+            </td>
+            <td>
+              <!-- <a
+                class="btn btn-danger m-1"
+                data-toggle="modal"
+                data-target="#exampleModal"
+                role="button"
+                *ngIf="item.isActive === '2'"
+                (click)="UnBlockUser(item.id)"
+                >Blocked</a
+              > -->
+              <!-- <a class="btn btn-warning m-1"data-toggle="modal"data-target="#exampleModal"role="button" *ngIf="item.isActive === '1'"(click)="onBlockUser(item.id)">Unbocked</a
+              > -->
+              <a (click)="edituser(item.id)" class="btn btn-success m-1" role="button">Edit</a>
+              <!-- <a *ngIf="item.role =='undefined'" class="btn btn-success m-1" role="button">Edit</a> -->
+
+              <a (click)="isPrfile(item._id)" class="btn btn-info m-1" role="button">
+                View Profile</a>
+              <!-- <a class="btn btn-primary m-1" href="#" role="button">T/W</a> -->
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <!-- paging -->
+      <nav>
+        <ul class="pagination">
+          <li class="page-item button" *ngFor="let buttons of pageingtation.pageingtations(pageTotal,pageTotal)"
+            [ngClass]="{'button-them': buttons?.active === 1}">
+            <a class="page-link myclass" [ngClass]="{'myclass':buttons?.active === 1}"
+              (click)="click_pagemodalTo(buttons?.page)">{{buttons?.name}}</a>
+          </li>
+        </ul>
+      </nav>
+      <!-- paging -->
+    </div>
+  </div>
+</div>
+<!-- Button trigger modal -->
+
+<div id="sidebar-overlay"></div>
+
+<!-- <app-footer></app-footer> -->

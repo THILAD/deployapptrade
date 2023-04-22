@@ -1,0 +1,244 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+
+<div class="row justify-content-md-center">
+  <div class="col-md-8">
+    <div class="card card-primary card-outline">
+      <div class="card-body box-profile">
+        <div class="text-center">
+          <img
+            class="profile-user-img img-fluid img-circle"
+            src="../../../assets/img/userprofile.jpg"
+            alt="User profile picture"
+          />
+        </div>
+        <h3 class="profile-username text-center">{{ userData?.username }}</h3>
+        <p class="text-muted text-center">Email:None</p>
+        <p class="text-muted text-center">UserId:{{ userData?._id }}</p>
+
+        <ul class="list-group list-group-unbordered mb-3">
+          <li class="list-group-item">
+            <b>Create Time</b>
+            <a class="float-right">{{ userData?.createdAt.split(":")[0] }}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Permistion</b> <a class="float-right">{{ userData?.role }}</a>
+          </li>
+          <li class="list-group-item">
+            <b>Total Balance</b>
+            <a class="float-right font-weight-bold" >{{wallet_total}} <strong>$</strong></a>
+          </li>
+          <li class="list-group-item">
+            <b>Status</b> <a class="float-right">normal</a>
+          </li>
+        </ul>
+        <div class="col-sm-6 float-right">
+          <a
+            class="btn btn-primary btn-block"
+            data-toggle="modal"
+            data-target="#modal-lg"
+            ><b>withdraw</b></a
+          >
+        </div>
+        <div class="col-sm-6">
+          <a
+            class="btn btn-warning btn-block"
+            data-toggle="modal"
+            data-target="#modal-lg2"
+            ><b>Deposit</b></a
+          >
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+<div class="container">
+    <div class="card">
+        <div class="card-header">
+          <h3 class="card-title">Transection History</h3>
+        </div>
+        <div class="card-body p-0">
+          <table class="table table-striped" >
+            <thead>
+              <tr>
+                <th style="width: 10px">Id</th>
+                <th>Transection Time</th>
+                <th style="width: 240px">type</th>
+    
+                <th style="width: 270px">Amount</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of walletDataAll">
+                <td>{{item?._id}}</td>
+                <td >{{item?.createdAt.split(':')[0]}}</td>
+                <td>{{item.type}}</td>
+                <!-- <td   *ngIf="item?.isSuccess==true">completed</td> -->
+                <!-- <td   *ngIf="item?.isSuccess==true"> <span class="text-success font-weight-bold">completed</span></td>
+                <td   *ngIf="item?.isSuccess==false"> <span class="text-warning font-weight-bold">pending</span></td> -->
+                <td  *ngIf="item?.status=='out'"><span class="text-danger font-weight-bold">-{{item.amount}} <strong>$</strong></span></td>
+                <td  *ngIf="item?.status=='in'"><span class="text-success font-weight-bold">+{{item.amount}} <strong>$</strong></span></td>
+                <!-- <td><span class="badge bg-success">{{item?.amount}} <strong>$</strong></span></td> -->
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+</div>
+<!-- withdraw -->
+<section class="content">
+  <div class="modal fade" id="modal-lg">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Withdraw</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Amount</label>
+                    <input
+                      type="number"
+                      #amount
+                      class="form-control"
+                      placeholder="Enter ..."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Acount Name</label>
+                    <input
+                      type="text"
+                      value=""
+                      #acountName
+                      class="form-control"
+                      placeholder="Enter ..."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Bank name</label>
+                    <input
+                      type="text"
+                      value=""
+                      #bankName
+                      class="form-control"
+                      placeholder="Enter ..."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label>Card Number</label>
+                    <input
+                      type="number"
+                      value=""
+                      #cardNumber
+                      class="form-control"
+                      placeholder="Enter ..."
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrition</label>
+                    <textarea
+                      class="form-control"
+                      value=""
+                      placeholder="Enter ..."
+                      #description
+                      id="exampleFormControlTextarea1"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">
+            Confrimed
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="content">
+  <div class="modal fade" id="modal-lg2">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <h4 class="modal-title text-center">Recharger</h4>
+          <button
+            type="button"
+            class="close"
+            data-dismiss="modal"
+            aria-label="Close"
+          >
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div class="card-body">
+            <form>
+              <div class="row">
+                <div class="col-sm-12">
+                  <div class="form-group">
+                    <label>Amount</label>
+                    <input
+                      type="number"
+                      #amountDeposit
+                      class="form-control"
+                      placeholder="Enter ..."
+                    />
+                  </div>
+                </div>
+                <!-- <div class="col-sm-12">
+                  <div class="form-group">
+                    <label for="exampleFormControlTextarea1">Descrition</label>
+                    <textarea
+                      class="form-control"
+                      value=""
+                      placeholder="Enter ..."
+                      #descriptionDe
+                      id="exampleFormControlTextarea1"
+                      rows="2"
+                    ></textarea>
+                  </div>
+                </div> -->
+              </div>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer justify-content-between">
+          <button type="button" class="btn btn-default" data-dismiss="modal">
+            Close
+          </button>
+          <button type="button" class="btn btn-success" data-dismiss="modal" (click)="isDepositRecharg()">
+            Confrimed
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

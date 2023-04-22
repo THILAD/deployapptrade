@@ -1,0 +1,126 @@
+<app-header></app-header>
+<app-sidebar></app-sidebar>
+<div class="content-wrapper" style="min-height: auto">
+  <div class="content-header">
+    <div class="row">
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-info"
+            ><i class="far fa-envelope"></i
+          ></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Today Trad</span>
+            <span class="info-box-number">1,410</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-success"
+            ><i class="far fa-flag"></i
+          ></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Bookmarks</span>
+            <span class="info-box-number">410</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-warning"
+            ><i class="far fa-copy"></i
+          ></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Uploads</span>
+            <span class="info-box-number">13,648</span>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-3 col-sm-6 col-12">
+        <div class="info-box">
+          <span class="info-box-icon bg-danger"
+            ><i class="fa fa-history"></i
+          ></span>
+          <div class="info-box-content">
+            <span class="info-box-text">Refresh</span>
+            <span class="info-box-number">93,139</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content">
+    <div class="table-responsive">
+      <table class="table">
+        <thead class="table-dark">
+          <tr>
+            <th scope="col">No.</th>
+            <th >Owner</th>
+            <th>OpenTime</th>
+            <th >Curent Name</th>
+            <th >Direction</th>
+            <th scope="col">Open</th>
+            <th >amount</th>
+            <th >Action</th>
+
+            <!-- <th scope="col">commistion</th>
+            <th scope="col">Profit/Loss</th>
+            <th scope="col">Balance Total</th>
+          </tr> -->
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of tradeDatalist">
+            <th scope="row">{{item._id}}</th>
+            <td>{{item.owner.username}}</td>
+            <td>{{item.timer}}</td>
+            <td>{{item.bet}}</td>
+            <td>{{item.type}}</td>
+            <td>{{item.direction}}</td>
+            <td>{{item.wallet.amount}} <strong>$</strong></td>
+            <td>
+              <form  *ngIf="item?.result==null">
+                <fieldset class="form-group">
+                  <div class="row">
+                    <div class="col-sm-10">
+                      <div class="form-check" *ngFor="let item of selection">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios1" checked="{{item}}" value="{{item}}" (change)="handleChange($event)">
+                        <label class="form-check-label" for="gridRadios1">
+                          {{item}}
+                        </label>
+                      </div>
+                      <!-- <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="win"(change)="handleChange($event)">
+                        <label class="form-check-label" for="gridRadios2">
+                         Win
+                        </label>
+                      </div> -->
+                      <!-- <div class="form-check">
+                        <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2" value="lose"(change)="handleChange($event)"> 
+                        <label class="form-check-label" for="gridRadios2">
+                         Loses
+                        </label>
+                      </div> -->
+                    </div>
+                  </div>
+                </fieldset>
+              </form>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    <!-- paging -->
+    <nav>
+      <ul class="pagination">
+        <li class="page-item button" *ngFor="let buttons of pageingtation.pageingtations(pageTotal,pageTotal)"
+          [ngClass]="{'button-them': buttons?.active === 1}">
+          <a class="page-link myclass" [ngClass]="{'myclass':buttons?.active === 1}"
+            (click)="click_pagemodalTo(buttons?.page)">{{buttons?.name}}</a>
+        </li>
+      </ul>
+    </nav>
+    <!-- paging -->
+    </div>
+  </div>
+</div>
+<div id="sidebar-overlay"></div>
+<!-- <app-footer></app-footer> -->

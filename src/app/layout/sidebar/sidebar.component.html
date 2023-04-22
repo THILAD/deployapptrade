@@ -1,0 +1,119 @@
+
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <a class="brand-link">
+      <img
+        src="../../assets/img/user.jpg"
+        alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        style="opacity: 0.8"
+      />
+     
+      <p>Hello!  <span class="brand-text font-weight-light"> {{isFullname}}</span></p>
+    </a>
+
+    <div class="sidebar">
+      <nav class="mt-2">
+        <ul
+          class="nav nav-pills nav-sidebar flex-column"
+          data-widget="treeview"
+          role="menu"
+          data-accordion="false"
+        >
+        <li class="nav-item">
+            <a class="nav-link" >
+              <i class="nav-icon fas fa-history"></i>
+              <p>
+               Trading
+              </p>
+            </a>
+          </li>
+          <!-- <li class="nav-item menu-open">
+            <a href="#" class="nav-link active">
+              <i class="nav-icon fas fa-tachometer-alt"></i>
+              <p>
+                Order managenent
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="./index.html" class="nav-link">
+                  <p>Transection flow</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="./index2.html" class="nav-link">
+                  <p>close log</p>
+                </a>
+              </li>
+           
+            </ul>
+          </li> -->
+          <!-- <li class="nav-item">
+            <a href="pages/widgets.html" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Widgets
+                <span class="right badge badge-danger">New</span>
+              </p>
+            </a>
+          </li> -->
+          <li class="nav-item">
+            <a class="nav-link">
+              <i class="nav-icon fas fa-user"></i>
+              <p>
+                User Management
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a class="nav-link"  (click)="RouterToUser()">
+                  <p>Super admin</p>
+                </a>
+              </li>
+        
+              <li class="nav-item">
+                <a  class="nav-link"  (click)="transfer()">
+                  <p>Admin</p>
+                </a>
+              </li>
+              
+              <li class="nav-item">
+                <a  class="nav-link"  (click)="withdraw()">
+                  <p>Customer</p>
+                </a>
+              </li>
+              
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a  class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Trade Menagement
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a class="nav-link">
+                  <p>Live Trading</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link">
+                  <p>History Trade</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link" data-toggle="dropdown"  (click)="logout()">
+                <button type="button" class="btn btn-block btn-danger btn-sm">Log out</button>
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </aside>

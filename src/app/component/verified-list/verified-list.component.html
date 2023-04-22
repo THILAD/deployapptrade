@@ -1,0 +1,105 @@
+<app-header></app-header>
+
+<app-sidebar></app-sidebar>
+<div class="my-container">
+ 
+<div class="content-wrapper" style="min-height: auto">
+  <!-- <div class="content-header">
+    <section id="container" class="sidebar-close">
+        <section id="main-content">
+            <section class="wrapper">
+                <br />
+                <a ><button type="submit" class="btn btn-info"  (click)="getlistVerified()">All </button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a ><button type="submit" class="btn btn-success"  (click)="isgetListBysatus('completed')">completed</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a ><button type="submit" class="btn btn-warning"(click)="isgetListBysatus('pending')">pending</button></a>&nbsp;&nbsp;&nbsp;&nbsp;
+            </section>
+        </section>
+    </section>
+</div> -->
+
+  <div class="content">
+    <div class="table-responsive">
+      <h2>User of List Verified</h2>
+      <table class="table">
+        <thead class="table-success">
+          <tr>
+            <th >Usernaem</th>
+            <th >Bank detail</th>
+            <th >Mobile No</th>
+            <th >identity No</th>
+
+            <th >Status </th>
+            <th >createAt</th>
+            <th >Action</th>
+            <th scope="col">Check</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let item of verifiedData">
+            <th scope="row">{{item.user.fullname}}</th>
+            <td>
+              <textarea  type="text" value={{item.bankAccount.bankName}},{{item.bankAccount.bankType}},{{item.bankAccount.bankFirstname}},{{item.bankAccount.bankLastname}},{{item.bankAccount.bankAccountNumber}}   class="form-control" aria-label="Default" aria-describedby="inputGroup-sizing-default"></textarea>
+            </td>
+            <td>
+              {{item.phoneNumber}}
+            </td>
+            <td>
+              {{item.identityCardNumber}}
+            </td>
+
+            <td >
+              <span class="badge badge-danger text-white" *ngIf="item?.user?.isVerified?.status=='rejected'">Rejected </span>
+              <span class="badge badge-success text-white" *ngIf="item?.user?.isVerified?.status=='approved'">completed</span>
+              <span class="badge badge-warning text-white" *ngIf="item?.user?.isVerified?.status=='pending'">pending </span>
+            </td>
+            <td>{{item.createdAt.split(':')[0]}}</td>
+            <td>
+              <button class="btn btn-info btn-sm"  *ngIf="item?.user?.isVerified?.status=='pending'"(click)="confrimAlert(item._id)">Approve </button>
+              <button class="btn btn-danger btn-sm"  *ngIf="item?.user?.isVerified?.status=='pending'"(click)="confrimAlertReject(item._id)">Reject</button>
+              <button class="btn btn-primary btn-sm"  *ngIf="item?.user?.isVerified?.status=='rejected'"(click)="isRejected(item._id)">Edited</button>
+
+
+            </td>
+            <td scope="row">
+                <button class="btn btn-info btn-sm" data-toggle="modal"
+                data-target="#exampleModal"> photo</button>
+            </td>
+              <!-- Modal -->
+              <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+              aria-labelledby="exampleModalLabel" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                      <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Photo Detail</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                          </button>
+                      </div>
+                      <div class="modal-body">
+                          <!-- <div class="product-img ">
+                              {{loadImage(item.transferSlip)}}
+                              <img crossorigin="anonymous" [src]="imageSource">
+                          </div> -->
+                      </div>
+                  </div>
+              </div>
+          </div>
+          <!-- modal -->
+          </tr>
+        </tbody>
+      </table>
+      
+      <nav>
+        <ul class="pagination">
+            <li class="page-item button" *ngFor="let buttons of pageingtation.pageingtations(pageTotal,pageTotal)"
+                [ngClass]="{'button-them': buttons?.active === 1}">
+                <a class="page-link myclass" [ngClass]="{'myclass':buttons?.active === 1}"
+                    (click)="click_pagemodalTo(buttons?.page)">{{buttons?.name}}</a>
+            </li>
+        </ul>
+    </nav>
+    <!-- paging -->
+    </div>
+  </div>
+</div>
+<div id="sidebar-overlay"></div>
